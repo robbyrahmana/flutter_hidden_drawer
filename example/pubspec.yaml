@@ -1,0 +1,24 @@
+name: example
+description: Beautiful custom hidden drawer. Please press star in my repo if you like it. Thank you.
+version: 0.0.1
+author: Robby Rahmana <robbyrahmana79@gmail.com>
+homepage: https://github.com/robbyrahmana/flutter_hidden_drawer
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_hidden_drawer:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+dependency_overrides:
+  flutter_hidden_drawer:
+    path: ../
+
+flutter:
+  uses-material-design: true
