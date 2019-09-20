@@ -4,12 +4,21 @@ import 'package:flutter_hidden_drawer/src/providers/drawer_menu_state.dart';
 import 'package:provider/provider.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
-  HiddenDrawerMenu({this.header, this.footer, @required this.menu})
-      : assert(menu != null);
+  HiddenDrawerMenu(
+      {this.header,
+      this.footer,
+      @required this.menu,
+      this.menuColor = Colors.transparent,
+      this.menuActiveColor = Colors.blue,
+      this.drawerDecoration})
+      : assert(menu != null || menu.length > 0);
 
   final Widget header;
   final Widget footer;
   final List<DrawerMenu> menu;
+  final Color menuColor;
+  final Color menuActiveColor;
+  final BoxDecoration drawerDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +29,7 @@ class HiddenDrawerMenu extends StatelessWidget {
       child: Container(
         height: size.height,
         width: size.width,
+        decoration: drawerDecoration ?? BoxDecoration(color: Colors.white),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -46,8 +56,8 @@ class HiddenDrawerMenu extends StatelessWidget {
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 500),
                       color: state.currentMenuIndex == index
-                          ? Colors.blue
-                          : Colors.white,
+                          ? menuActiveColor
+                          : menuColor,
                       child: menu[index].child,
                     ),
                   );

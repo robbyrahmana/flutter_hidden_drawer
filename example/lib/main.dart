@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
           tooltip: 'Increment',
           child: Icon(Icons.add),
         ),
-        drawer: Container(),
       ),
       drawer: HiddenDrawerMenu(
         menu: <DrawerMenu>[

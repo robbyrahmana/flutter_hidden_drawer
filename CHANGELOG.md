@@ -1,3 +1,8 @@
+## 0.1.1 - 21/09/2019
+
+- Change required parameter from HiddenDrawerMenu to Widget
+- Add menuColor, menuActiveColor and drawerDecoration to HiddenDrawerMenu
+
 ## 0.1.0 - 20/09/2019
 
 - Add HiddenDrawerMenu for the drawer that accept list of DrawerMenu

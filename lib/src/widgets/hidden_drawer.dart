@@ -1,16 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hidden_drawer/src/flutter_hidden_drawer.dart';
 import 'package:flutter_hidden_drawer/src/providers/drawer_menu_state.dart';
 import 'package:provider/provider.dart';
 
 class HiddenDrawer extends StatefulWidget {
   HiddenDrawer({@required this.child, @required this.drawer, Key key})
-      : super(key: key);
+      : assert(child != null),
+        assert(drawer != null),
+        super(key: key);
 
   final Widget child;
 
-  final HiddenDrawerMenu drawer;
+  /// Hidden drawer widget that will build your drawer,
+  /// you should use HiddenDrawerMenu for more user experience
+  final Widget drawer;
 
   @override
   HiddenDrawerState createState() => HiddenDrawerState();
@@ -144,7 +147,6 @@ class HiddenDrawerState extends State<HiddenDrawer>
   }
 
   void handleDrawer() {
-    print(_drawerState);
     if (_drawerState) {
       _close();
     } else {
