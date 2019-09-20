@@ -62,7 +62,28 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         drawer: Container(),
       ),
-      drawer: HiddenDrawerMenu(),
+      drawer: HiddenDrawerMenu(
+        menu: <DrawerMenu>[
+          DrawerMenu(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text("Menu 1"),
+              ),
+              onPressed: () {
+                print("Menu 1");
+              }),
+          DrawerMenu(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text("Menu 2"),
+              ),
+              onPressed: () {
+                print("Menu 2");
+              }),
+        ],
+        header: Text("Header"),
+        footer: Text("Footer"),
+      ),
     );
   }
 }

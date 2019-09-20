@@ -1,3 +1,4 @@
-export 'hidden_drawer.dart';
-export 'hidden_drawer_menu.dart';
-export 'hidden_drawer_icon.dart';
+export 'widgets/hidden_drawer.dart';
+export 'widgets/hidden_drawer_menu.dart';
+export 'widgets/hidden_drawer_icon.dart';
+export 'models/drawer_menu.dart';

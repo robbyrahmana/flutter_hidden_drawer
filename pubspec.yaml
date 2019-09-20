@@ -1,15 +1,16 @@
 name: flutter_hidden_drawer
 description: Beautiful custom hidden drawer. Please press star in my repo if you like it. Thank you.
-version: 0.0.1
+version: 0.1.0
 author: Robby Rahmana <robbyrahmana79@gmail.com>
 homepage: https://github.com/robbyrahmana/flutter_hidden_drawer
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^3.1.0
 
 dev_dependencies:
   flutter_test:

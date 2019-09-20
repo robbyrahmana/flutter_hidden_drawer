@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hidden_drawer/src/flutter_hidden_drawer.dart';
+import 'package:flutter_hidden_drawer/src/providers/drawer_menu_state.dart';
+import 'package:provider/provider.dart';
 
 class HiddenDrawer extends StatefulWidget {
   HiddenDrawer({@required this.child, @required this.drawer, Key key})
@@ -56,31 +58,36 @@ class HiddenDrawerState extends State<HiddenDrawer>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        widget.drawer,
-        Positioned(
-          left: _leftOffset.value,
-          child: Transform.scale(
-            scale: _scale.value,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: GestureDetector(
-                onHorizontalDragUpdate: _move,
-                onHorizontalDragEnd: _settle,
-                dragStartBehavior: DragStartBehavior.start,
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [BoxShadow(blurRadius: _blur.value)],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => DrawerMenuState()),
+      ],
+      child: Stack(
+        children: <Widget>[
+          widget.drawer,
+          Positioned(
+            left: _leftOffset.value,
+            child: Transform.scale(
+              scale: _scale.value,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: GestureDetector(
+                  onHorizontalDragUpdate: _move,
+                  onHorizontalDragEnd: _settle,
+                  dragStartBehavior: DragStartBehavior.start,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [BoxShadow(blurRadius: _blur.value)],
+                    ),
+                    child: widget.child,
                   ),
-                  child: widget.child,
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -104,9 +111,15 @@ class HiddenDrawerState extends State<HiddenDrawer>
       switch (Directionality.of(context)) {
         case TextDirection.rtl:
           _controller.fling(velocity: -visualVelocity);
+          setState(() {
+            _drawerState = false;
+          });
           break;
         case TextDirection.ltr:
           _controller.fling(velocity: visualVelocity);
+          setState(() {
+            _drawerState = true;
+          });
           break;
       }
     } else if (_controller.value < 0.5) {
@@ -131,6 +144,7 @@ class HiddenDrawerState extends State<HiddenDrawer>
   }
 
   void handleDrawer() {
+    print(_drawerState);
     if (_drawerState) {
       _close();
     } else {
