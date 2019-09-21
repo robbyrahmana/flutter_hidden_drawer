@@ -35,53 +35,60 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return HiddenDrawer(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: HiddenDrawerIcon(),
-          title: Text(widget.title),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          builder: (context) => DrawerMenuState(),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.display1,
-              ),
-            ],
+      ],
+      child: HiddenDrawer(
+        child: Scaffold(
+          appBar: AppBar(
+            leading: HiddenDrawerIcon(),
+            title: Text(widget.title),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'You have pushed the button this many times:',
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.display1,
+                ),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
+        drawer: HiddenDrawerMenu(
+          menu: <DrawerMenu>[
+            DrawerMenu(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text("Menu 1"),
+                ),
+                onPressed: () {
+                  print("Menu 1");
+                }),
+            DrawerMenu(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text("Menu 2"),
+                ),
+                onPressed: () {
+                  print("Menu 2");
+                }),
+          ],
+          header: Text("Header"),
+          footer: Text("Footer"),
         ),
-      ),
-      drawer: HiddenDrawerMenu(
-        menu: <DrawerMenu>[
-          DrawerMenu(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text("Menu 1"),
-              ),
-              onPressed: () {
-                print("Menu 1");
-              }),
-          DrawerMenu(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text("Menu 2"),
-              ),
-              onPressed: () {
-                print("Menu 2");
-              }),
-        ],
-        header: Text("Header"),
-        footer: Text("Footer"),
       ),
     );
   }

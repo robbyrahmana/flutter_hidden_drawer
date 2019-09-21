@@ -61,36 +61,31 @@ class HiddenDrawerState extends State<HiddenDrawer>
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => DrawerMenuState()),
-      ],
-      child: Stack(
-        children: <Widget>[
-          widget.drawer,
-          Positioned(
-            left: _leftOffset.value,
-            child: Transform.scale(
-              scale: _scale.value,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: GestureDetector(
-                  onHorizontalDragUpdate: _move,
-                  onHorizontalDragEnd: _settle,
-                  dragStartBehavior: DragStartBehavior.start,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [BoxShadow(blurRadius: _blur.value)],
-                    ),
-                    child: widget.child,
+    return Stack(
+      children: <Widget>[
+        widget.drawer,
+        Positioned(
+          left: _leftOffset.value,
+          child: Transform.scale(
+            scale: _scale.value,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: GestureDetector(
+                onHorizontalDragUpdate: _move,
+                onHorizontalDragEnd: _settle,
+                dragStartBehavior: DragStartBehavior.start,
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [BoxShadow(blurRadius: _blur.value)],
                   ),
+                  child: widget.child,
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

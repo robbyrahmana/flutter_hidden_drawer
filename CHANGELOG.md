@@ -1,3 +1,7 @@
+## 0.1.2 - 21/09/2019
+
+- Change to global provider
+
 ## 0.1.1 - 21/09/2019
 
 - Change required parameter from HiddenDrawerMenu to Widget
