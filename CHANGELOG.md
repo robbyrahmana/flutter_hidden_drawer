@@ -1,3 +1,7 @@
+## 0.1.3 - 22/09/2019
+
+- Add custom configuration for HiddenDrawer({drawerWidth, drawerHeaderHeight, drawerBlurRadius})
+
 ## 0.1.2 - 21/09/2019
 
 - Change to global provider

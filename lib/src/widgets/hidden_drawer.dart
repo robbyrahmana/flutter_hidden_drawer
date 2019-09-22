@@ -1,10 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hidden_drawer/src/providers/drawer_menu_state.dart';
-import 'package:provider/provider.dart';
 
 class HiddenDrawer extends StatefulWidget {
-  HiddenDrawer({@required this.child, @required this.drawer, Key key})
+  HiddenDrawer(
+      {@required this.child,
+      @required this.drawer,
+      this.drawerBlurRadius = 12,
+      this.drawerWidth = 250,
+      this.drawerHeaderHeight = 250,
+      Key key})
       : assert(child != null),
         assert(drawer != null),
         super(key: key);
@@ -14,6 +18,12 @@ class HiddenDrawer extends StatefulWidget {
   /// Hidden drawer widget that will build your drawer,
   /// you should use HiddenDrawerMenu for more user experience
   final Widget drawer;
+
+  final double drawerWidth;
+
+  final double drawerHeaderHeight;
+
+  final double drawerBlurRadius;
 
   @override
   HiddenDrawerState createState() => HiddenDrawerState();
@@ -37,6 +47,8 @@ class HiddenDrawerState extends State<HiddenDrawer>
   bool _drawerState = false;
 
   bool get isDrawerOpen => _drawerState;
+  double get drawerWidth => widget.drawerWidth * 1.2;
+  double get drawerHeaderHeight => widget.drawerHeaderHeight;
 
   @override
   void initState() {
@@ -49,14 +61,16 @@ class HiddenDrawerState extends State<HiddenDrawer>
       ..addListener(() {
         setState(() {});
       });
-    _leftOffset = Tween<double>(begin: 0, end: 250).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
-    _blur = Tween<double>(begin: 0, end: 12).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
+    _leftOffset =
+        Tween<double>(begin: 0, end: widget.drawerWidth).animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          });
+    _blur = Tween<double>(begin: 0, end: widget.drawerBlurRadius)
+        .animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -75,11 +89,22 @@ class HiddenDrawerState extends State<HiddenDrawer>
                 onHorizontalDragUpdate: _move,
                 onHorizontalDragEnd: _settle,
                 dragStartBehavior: DragStartBehavior.start,
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [BoxShadow(blurRadius: _blur.value)],
-                  ),
-                  child: widget.child,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(blurRadius: _blur.value)],
+                      ),
+                      child: widget.child,
+                    ),
+                    isDrawerOpen
+                        ? Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            color: Colors.transparent,
+                          )
+                        : SizedBox(),
+                  ],
                 ),
               ),
             ),
@@ -106,18 +131,15 @@ class HiddenDrawerState extends State<HiddenDrawer>
     if (details.velocity.pixelsPerSecond.dx.abs() >= 365.0) {
       double visualVelocity = details.velocity.pixelsPerSecond.dx /
           MediaQuery.of(context).size.width;
+      setState(() {
+        _drawerState = visualVelocity > 0;
+      });
       switch (Directionality.of(context)) {
         case TextDirection.rtl:
           _controller.fling(velocity: -visualVelocity);
-          setState(() {
-            _drawerState = false;
-          });
           break;
         case TextDirection.ltr:
           _controller.fling(velocity: visualVelocity);
-          setState(() {
-            _drawerState = true;
-          });
           break;
       }
     } else if (_controller.value < 0.5) {

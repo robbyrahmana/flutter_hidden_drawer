@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
       child: HiddenDrawer(
+        drawerWidth: MediaQuery.of(context).size.width * .4,
         child: Scaffold(
           appBar: AppBar(
             leading: HiddenDrawerIcon(),

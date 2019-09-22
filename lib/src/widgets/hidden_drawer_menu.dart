@@ -34,15 +34,17 @@ class HiddenDrawerMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: size.height * .2,
-              width: 250,
+              height: HiddenDrawer.of(context).drawerHeaderHeight,
+              width: HiddenDrawer.of(context).drawerWidth,
               child: Align(
                   alignment: Alignment.bottomLeft,
                   child: header != null ? header : Container()),
             ),
             SizedBox(
-              height: size.height * .7,
-              width: 250,
+              height: size.height -
+                  (HiddenDrawer.of(context).drawerHeaderHeight +
+                      (size.height * .1)),
+              width: HiddenDrawer.of(context).drawerWidth,
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 itemCount: menu.length,
@@ -66,7 +68,7 @@ class HiddenDrawerMenu extends StatelessWidget {
             ),
             SizedBox(
               height: size.height * .1,
-              width: 250,
+              width: HiddenDrawer.of(context).drawerWidth,
               child: footer != null ? footer : Container(),
             ),
           ],
