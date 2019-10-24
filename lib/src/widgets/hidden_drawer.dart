@@ -115,37 +115,43 @@ class HiddenDrawerState extends State<HiddenDrawer>
   }
 
   void _move(DragUpdateDetails details) {
-    double delta = details.primaryDelta / MediaQuery.of(context).size.width;
-    switch (Directionality.of(context)) {
-      case TextDirection.rtl:
-        _controller.value -= delta;
-        break;
-      case TextDirection.ltr:
-        _controller.value += delta;
-        break;
+    if (Navigator.of(context).canPop()) {
+    } else {
+      double delta = details.primaryDelta / MediaQuery.of(context).size.width;
+      switch (Directionality.of(context)) {
+        case TextDirection.rtl:
+          _controller.value -= delta;
+          break;
+        case TextDirection.ltr:
+          _controller.value += delta;
+          break;
+      }
     }
   }
 
   void _settle(DragEndDetails details) {
-    if (_controller.isDismissed) return;
-    if (details.velocity.pixelsPerSecond.dx.abs() >= 365.0) {
-      double visualVelocity = details.velocity.pixelsPerSecond.dx /
-          MediaQuery.of(context).size.width;
-      setState(() {
-        _drawerState = visualVelocity > 0;
-      });
-      switch (Directionality.of(context)) {
-        case TextDirection.rtl:
-          _controller.fling(velocity: -visualVelocity);
-          break;
-        case TextDirection.ltr:
-          _controller.fling(velocity: visualVelocity);
-          break;
-      }
-    } else if (_controller.value < 0.5) {
-      _close();
+    if (Navigator.of(context).canPop()) {
     } else {
-      _open();
+      if (_controller.isDismissed) return;
+      if (details.velocity.pixelsPerSecond.dx.abs() >= 365.0) {
+        double visualVelocity = details.velocity.pixelsPerSecond.dx /
+            MediaQuery.of(context).size.width;
+        setState(() {
+          _drawerState = visualVelocity > 0;
+        });
+        switch (Directionality.of(context)) {
+          case TextDirection.rtl:
+            _controller.fling(velocity: -visualVelocity);
+            break;
+          case TextDirection.ltr:
+            _controller.fling(velocity: visualVelocity);
+            break;
+        }
+      } else if (_controller.value < 0.5) {
+        _close();
+      } else {
+        _open();
+      }
     }
   }
 

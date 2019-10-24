@@ -1,3 +1,8 @@
+## 0.1.4 - 25/10/2019
+
+- Handle drawer open for popState
+- Add custom configuration for HiddenDrawerIcon
+
 ## 0.1.3 - 22/09/2019
 
 - Add custom configuration for HiddenDrawer({drawerWidth, drawerHeaderHeight, drawerBlurRadius})
