@@ -30,8 +30,7 @@ class HiddenDrawer extends StatefulWidget {
 
   static HiddenDrawerState of(BuildContext context) {
     assert(context != null);
-    final HiddenDrawerState result =
-        context.ancestorStateOfType(const TypeMatcher<HiddenDrawerState>());
+    final HiddenDrawerState result = context.findAncestorStateOfType();
     if (result != null) return result;
     throw FlutterError(
         'HiddenDrawer.of() called with a context that does not contain a HiddenDrawer.');

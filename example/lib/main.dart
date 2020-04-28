@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          builder: (context) => DrawerMenuState(),
+          create: (context) => DrawerMenuState(),
         ),
       ],
       child: MaterialApp(

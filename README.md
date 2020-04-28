@@ -14,7 +14,7 @@ Tooltip function built in for flutter. Please press star in my repo if you like 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          builder: (context) => DrawerMenuState(),
+          create: (context) => DrawerMenuState(),
         ),
       ],
       child: HiddenDrawer(

@@ -1,3 +1,7 @@
+## 0.1.5 - 28/04/2020
+
+- Upgrade provider to ^4.0.5+1
+
 ## 0.1.4 - 25/10/2019
 
 - Handle drawer open for popState
