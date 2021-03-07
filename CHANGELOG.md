@@ -1,3 +1,7 @@
+## 0.1.6 - 28/04/2020
+
+- Upgrade provider to ^5.0.0
+
 ## 0.1.5 - 28/04/2020
 
 - Upgrade provider to ^4.0.5+1
