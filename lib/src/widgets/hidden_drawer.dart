@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 
 class HiddenDrawer extends StatefulWidget {
   HiddenDrawer(
-      {@required this.child,
-      @required this.drawer,
+      {required this.child,
+      required this.drawer,
       this.drawerBlurRadius = 12,
       this.drawerWidth = 250,
       this.drawerHeaderHeight = 250,
-      Key key})
-      : assert(child != null),
-        assert(drawer != null),
-        super(key: key);
+      Key? key})
+      : super(key: key);
 
   final Widget child;
 
@@ -28,9 +26,9 @@ class HiddenDrawer extends StatefulWidget {
   @override
   HiddenDrawerState createState() => HiddenDrawerState();
 
-  static HiddenDrawerState of(BuildContext context) {
+  static HiddenDrawerState of(BuildContext? context) {
     assert(context != null);
-    final HiddenDrawerState result = context.findAncestorStateOfType();
+    final HiddenDrawerState? result = context!.findAncestorStateOfType();
     if (result != null) return result;
     throw FlutterError(
         'HiddenDrawer.of() called with a context that does not contain a HiddenDrawer.');
@@ -39,10 +37,10 @@ class HiddenDrawer extends StatefulWidget {
 
 class HiddenDrawerState extends State<HiddenDrawer>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _scale;
-  Animation<double> _leftOffset;
-  Animation<double> _blur;
+  late AnimationController _controller;
+  late Animation<double> _scale;
+  late Animation<double> _leftOffset;
+  late Animation<double> _blur;
   bool _drawerState = false;
 
   bool get isDrawerOpen => _drawerState;
@@ -116,7 +114,7 @@ class HiddenDrawerState extends State<HiddenDrawer>
   void _move(DragUpdateDetails details) {
     if (Navigator.of(context).canPop()) {
     } else {
-      double delta = details.primaryDelta / MediaQuery.of(context).size.width;
+      double delta = details.primaryDelta! / MediaQuery.of(context).size.width;
       switch (Directionality.of(context)) {
         case TextDirection.rtl:
           _controller.value -= delta;

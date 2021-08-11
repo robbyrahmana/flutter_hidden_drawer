@@ -4,8 +4,8 @@ import 'package:flutter_hidden_drawer/flutter_hidden_drawer.dart';
 class HiddenDrawerIcon extends StatefulWidget {
   HiddenDrawerIcon({this.backIcon, this.mainIcon});
 
-  final Icon backIcon;
-  final Icon mainIcon;
+  final Icon? backIcon;
+  final Icon? mainIcon;
 
   @override
   _HiddenDrawerIconState createState() => _HiddenDrawerIconState();
@@ -14,13 +14,13 @@ class HiddenDrawerIcon extends StatefulWidget {
 class _HiddenDrawerIconState extends State<HiddenDrawerIcon> {
   @override
   Widget build(BuildContext context) {
-    final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
     final bool canPop = parentRoute?.canPop ?? false;
 
     return canPop
         ? widget.backIcon != null
             ? IconButton(
-                icon: widget.backIcon,
+                icon: widget.backIcon!,
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
                 onPressed: () {
                   Navigator.maybePop(context);

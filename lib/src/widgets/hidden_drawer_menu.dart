@@ -7,18 +7,18 @@ class HiddenDrawerMenu extends StatelessWidget {
   HiddenDrawerMenu(
       {this.header,
       this.footer,
-      @required this.menu,
+      required this.menu,
       this.menuColor = Colors.transparent,
       this.menuActiveColor = Colors.blue,
       this.drawerDecoration})
-      : assert(menu != null || menu.length > 0);
+      : assert(menu.length > 0);
 
-  final Widget header;
-  final Widget footer;
+  final Widget? header;
+  final Widget? footer;
   final List<DrawerMenu> menu;
   final Color menuColor;
   final Color menuActiveColor;
-  final BoxDecoration drawerDecoration;
+  final BoxDecoration? drawerDecoration;
 
   @override
   Widget build(BuildContext context) {
