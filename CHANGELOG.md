@@ -1,3 +1,7 @@
+## 1.0.1 - 25/01/2022
+
+- Upgrade provider to ^6.0.2
+
 ## 1.0.0 - 11/08/2021
 
 - Null safety

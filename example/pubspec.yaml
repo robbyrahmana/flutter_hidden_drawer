@@ -1,7 +1,6 @@
 name: example
 description: Beautiful custom hidden drawer. Please press star in my repo if you like it. Thank you.
 version: 1.0.0
-author: Robby Rahmana <robbyrahmana79@gmail.com>
 homepage: https://github.com/robbyrahmana/flutter_hidden_drawer
 
 environment:
